@@ -1,0 +1,292 @@
+{% extends "base.html" %}
+{% block title %}Omron Microscan VT-Interface Module{% endblock %}
+
+{% block content %}
+<style>
+	.btn2__text:hover {
+		color: #005eb8;
+	}
+</style>
+<main>
+	<div class="container position-relative" style="padding-bottom: 20px;">
+		<!-- start 'launch weblink' content -->
+		<div class="row">
+			<!-- <div class="my-3 text-center" style="padding-bottom: 30px;"> -->
+			<div class="my-1 text-center">
+				<h1>Omron Microscan VT-Interface Module</h1>
+			</div>
+		</div>
+		<div class="row" style="margin:auto; max-width: 1080px;">
+			<div class="card p-0">
+				<div class="card-header border-bottom-0" style="background-color: #063c70; font: 400 17px/28px Open Sans,Arial,sans-serif; color:white; border-color: #272727;">
+					<div class="row justify-content-between align-items-center">
+						<div class="col-4">
+							<strong>Profile: {{ activeProfile }}</strong>
+						</div>
+						<div class="col-4 text-end">
+							<a class="btn btn--icon-animate-right border-0" href="{{ url_for('managescanners') }}" style="color: white;">
+								<span class="btn2__text">Manage Scanner Profiles</span>
+								<span class="fa-icon fas fa-chevron-right icon icon--right" title="" role="presentation" aria-hidden="true"></span>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="card-body g-0 p-0">
+					<div class="card-group justify-content-sm-center">
+						<!-- start scanner1 -->
+						<div class="card border-start-0 border-bottom-0 border-top-0" style="max-width: 540px;">
+							<div class="card-header" style="background-color: #272727; color: white; border-right-color: white; border-radius: 0 !important; ">
+								<div class="text-right">Bottom Side Scanner</div>
+							</div>
+							<div class="row g-0 align-items-center">
+								<div class="col-md-4" id="bottomScannerImg">[Image Loading]</div>
+								<div class="col-md-8">
+									<div class="card-body py-1">
+										<!-- <i class="fas fa-check text-success" style="font-size: 36px" data-toggle="tooltip" title="This scanner supports WebLink features and is currently connected"></i>&nbsp; MicroHawk ID-40 -->
+										<h5 class="card-title" id="bottomScannerTitle">(Reading Configuration)</h5>
+										<small><p class="card-text" id="bottomScannerBody"></p></small>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- end scanner1 -->
+		
+						<!-- start scanner2 -->
+						<div class="card border-end-0 border-bottom-0 border-top-0" style="max-width: 540px;">
+							<!-- <div class="card-header border-0 bg-transparent text-end px-3 pt-2 pb-0"> -->
+							<div class="card-header" style="background-color: #272727; color: white; border-left-color: white; border-radius: 0 !important; ">
+								<div class="text-right">Top Side Scanner</div>
+							</div>
+							<div class="row g-0 align-items-center">
+								<div class="col-md-4" id="topScannerImg">[Image Loading]</div>
+								<div class="col-md-8">
+									<div class="card-body py-1"> <!-- <i class="fas fa-exclamation-triangle text-danger"-->
+										<h5 class="card-title" id="topScannerTitle">(Reading Configuration)</h5>
+										<small><p class="card-text" id="topScannerBody"></p></small>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- end scanner2 -->
+					</div>
+					<!-- end active scanner display section -->
+				</div>
+			</div>
+		</div>
+		<!-- start Launch barcode reader button -->
+		<div class="row">
+			<div class="d-grid gap-2 d-sm-flex justify-content-sm-center" style="padding-top: 36px; padding-bottom: 60px;">
+				{% if dictActiveProfile['bsenabled'] == 1 %}
+					{% set s1ip=dictActiveProfile['bsip'] %}
+					{% set s1port=dictActiveProfile['bsport'] %}
+				{% else %}
+					{% set s1ip='' %}
+				{% endif %}
+				{% if dictActiveProfile['tsenabled'] == 1 %}
+					{% set s2ip=dictActiveProfile['tsip'] %}
+					{% set s2port=dictActiveProfile['tsport'] %}
+				{% else %}
+					{% set s2ip='' %}
+				{% endif %}
+				<a class="btn btn--outline btn--outline-a btn--icon-animate-right" href="{{ url_for('displayweblink', scanner1ip=dictActiveProfile['bsip'], scanner1port=dictActiveProfile['bsport'], scanner2ip=dictActiveProfile['tsip'], scanner2port=dictActiveProfile['tsport']) }}">
+					<span class="btn__text">Start Barcode Monitoring</span>
+					<span class="fa-icon fas fa-chevron-right icon icon--right" title="" role="presentation" aria-hidden="true"></span>
+				</a>
+			</div>
+		</div>
+		<!-- end Launch barcode reader button -->
+		
+		<!-- start karlbox navigation -->
+		<div class="row icon-boxes">
+			<!-- link 1 "Manage Scanners"-->
+			<div class="col d-flex align-items-stretch">
+				<div class="icon-box" style="background-image: url('static/img/microhawk_actionshot_edit2_60.png'); background-size: cover;">
+					<div class="icon"><i class="fas fa-tasks"></i></div>
+					<h4 class="title"><a href="{{url_for('managescanners')}}">Manage Scanners</a></h4>
+					<p class="description" style="font-weight: bold;">Add a new scanner, configure existing scanners, or remove an existing one.</p>
+				</div>
+			</div>
+		
+			<!-- link 2 "Settings"-->
+
+			<!--
+			<div class="col d-flex align-items-stretch justify-content-center">
+				<div class="icon-box" style="background-image: url('static/img/sample2_edit3_60.png'); background-size: cover;">
+					<div class="icon"><i class="fas fa-cogs"></i></div>
+					<h4 class="title"><a href="">Settings</a></h4>
+					<p class="description" style="font-weight: bold;">Configure Omron Microscan VT-Interface Module</p>
+				</div>
+			</div>
+			-->
+
+			<!-- link 3 "Help"-->
+			<div class="col d-flex align-items-stretch">
+				<div class="icon-box" style="background-image: url('static/img/sample3_edit3_60.png'); background-size: cover;">
+					<div class="icon"><i class="far fa-question-circle"></i></div>
+					<h4 class="title"><a href="{{url_for('help')}}">Help</a></h4>
+					<p class="description" style="font-weight: bold;">View user manuals, web resources, or contact information for additional support.</p>
+				</div>
+			</div>
+		</div>
+		<!-- end karlbox navigation -->
+	</div>
+</main>
+{% endblock %}
+
+{% block customScripts %}
+<script type=text/javascript src="{{url_for('static', filename='js/socket.io.min.js')}}"></script>
+<script>
+	$(document).ready(function(){
+		var bsScanner = '';
+		var tsScanner = '';
+		var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+		function modelToImgLookup(model) {
+			// returns URL for image
+			switch (String(model).toLowerCase()) {
+				case 'microhawk mv':
+					return 'img/model/microhawkmv.png';
+				case 'microhawk mv-20':
+					return 'img/model/microhawkmv-20.png';
+				case 'microhawk mv-30':
+					return 'img/model/microhawkmv-30.png';
+				case 'microhawk mv-40':
+					return 'img/model/microhawkmv-40.png';
+				case 'microhawk mv-45':
+					return 'img/model/mv-45.png';
+				case 'microhawk id-20':
+					return 'img/model/microhawkid-20.png';
+				case 'microhawk id-30':
+					return 'img/model/microhawkid-30.png';
+				case 'microhawk id-40':
+					return 'img/model/microhawkid-40.png';
+				case 'microhawk id-45':
+				case 'id-45':
+					return 'img/model/microhawkid-45.png';
+				case 'f420':
+					return 'img/model/v420.png';
+				case 'f420-f':
+					return 'img/model/v420-f.png';
+				case 'f430':
+					return 'img/model/v430.png';
+				case 'f430-f':
+					return 'img/model/v430-f.png';
+				default:
+					return 'img/model/unknown.png';
+			}
+		}
+		
+
+		// determine if scanner is connected over LAN
+		socket.on('Event_isScannerConnectedLanResult', function(msg) {
+			//console.log(msg);
+			// handle bottom scanner event
+			if (msg.ip == '{{ dictActiveProfile['bsip'] }}') 
+			{
+				// update fields with success or failure info
+				if (msg.result == 'success')
+				{
+					$('#bottomScannerIPStatus').addClass('badge alert-success');
+					if ('{{ dictActiveProfile['bsmodel'] }}' == 'Other Scanner')
+					{
+						$('#bottomScannerTitle').html('<i class="fas fa-check text-success" style="font-size: 36px" data-toggle="tooltip" title="This scanner may not support WebLink but is currently connected"></i>' + $('#bottomScannerTitle').html());
+					} else
+					{
+						$('#bottomScannerTitle').html('<i class="fas fa-check text-success" style="font-size: 36px" data-toggle="tooltip" title="This scanner supports WebLink features and is currently connected"></i>' + $('#bottomScannerTitle').html());
+					}
+				} 
+				else
+				{ 
+					$('#bottomScannerIPStatus').addClass('badge alert-danger');
+					$('#bottomScannerTitle').html('<i class="fas fa-exclamation-triangle text-danger" style="font-size: 36px" data-toggle="tooltip" title="This scanner is not connected"></i>' + $('#bottomScannerTitle').html());
+				}
+			} 
+			// handle top scanner event
+			else if (msg.ip == '{{ dictActiveProfile['tsip'] }}')
+			{
+				// update fields with success or failure info
+				if (msg.result == 'success')
+				{
+					$('#topScannerIPStatus').addClass('badge alert-success');
+					if ('{{ dictActiveProfile['tsmodel'] }}' == 'Other Scanner')
+					{
+						$('#topScannerTitle').html('<i class="fas fa-check text-success" style="font-size: 36px" data-toggle="tooltip" title="This scanner may not support WebLink but is currently connected"></i>' + $('#topScannerTitle').html());
+					} else
+					{
+						$('#topScannerTitle').html('<i class="fas fa-check text-success" style="font-size: 36px" data-toggle="tooltip" title="This scanner supports WebLink features and is currently connected"></i>' + $('#topScannerTitle').html());
+					}
+				} 
+				else
+				{ 
+					$('#topScannerIPStatus').addClass('badge alert-danger');
+					$('#topScannerTitle').html('<i class="fas fa-exclamation-triangle text-danger" style="font-size: 36px" data-toggle="tooltip" title="This scanner is not connected"></i>' + $('#topScannerTitle').html());
+				}
+			}
+		});
+
+		// update bottom scanner information based on configuration file
+		{% if dictActiveProfile['bsenabled'] == 1 %}
+			{% if dictActiveProfile['bscommtype'].lower() == 'ethernet' %}
+				{{ writeWebLog('Bottom scanner uses ethernet: ' + dictActiveProfile['bsip'] + ':' + dictActiveProfile['bsport'], 'DEBUG')|default('', True) }}
+				// set up initial values
+				$('#bottomScannerTitle').html('&nbsp; {{ dictActiveProfile['bsmodel'] }}');
+				$('#bottomScannerBody').html('Device Name: <b>{{ dictActiveProfile['bsname'] }}</b><br />MAC Address: <b>{{ dictActiveProfile['bsmac'] }}</b><br />Communication Type: <b>{{ dictActiveProfile['bscommtype'] }}</b><br />IP Address: <span id="bottomScannerIPStatus"><b>{{ dictActiveProfile['bsip'] }}</b></span><br />TCP Port: <b>{{ dictActiveProfile['bsport'] }}</b>');
+				imgPath = "static/" + modelToImgLookup('{{ dictActiveProfile['bsmodel'] }}');
+				$('#bottomScannerImg').html('<img src="' + imgPath + '" width="180px" class="img-fluid rounded-start">');
+
+				// ping scanner to update title
+				socket.emit('Event_isScannerConnectedLan', '{{ dictActiveProfile['bsip'] }}', {{ dictActiveProfile['bsport'] }});
+				//return false;
+			{% elif dictActiveProfile['bscommtype'].lower() == 'rs232' %}
+				//console.log('bottom side is serial type');
+				// set up initial values
+				$('#bottomScannerTitle').html('<i class="fas fa-question-circle text-muted" style="font-size: 36px" data-toggle="tooltip" title="This scanner uses serial communication; start the barcode reading process to determine connectivity."></i>&nbsp; {{ dictActiveProfile['bsmodel'] }}');
+				$('#bottomScannerBody').html('Device Name: <b>{{ dictActiveProfile['bsname'] }}</b><br />MAC Address: <b>{{ dictActiveProfile['bsmac'] }}</b><br />Communication Type: <b>{{ dictActiveProfile['bscommtype'] }}</b><br />Serial Port: <b>{{ dictActiveProfile['bsport'] }}</b><br />Baud Rate: <b>{{ dictActiveProfile['bsbaud'] }} B</b><br />Parity: <b>{{ dictActiveProfile['bsparity'] }}</b><br />Stop Bit: <b>{{ dictActiveProfile['bsstopbit'] }}</b><br />Byte Size: <b>{{ dictActiveProfile['bsbytesize'] }}</b>');
+			{% endif %}
+			// set image
+			imgPath = "static/" + modelToImgLookup('{{ dictActiveProfile['bsmodel'] }}');
+			$('#bottomScannerImg').html('<img src="' + imgPath + '" width="180px" class="img-fluid rounded-start">');
+			//<img id="bottomScannerImg" src="static/img/single.png" class="img-fluid rounded-start" alt="...">
+
+		{% else %}
+			{{ writeWebLog('Bottom scanner disabled per profile', 'INFO')|default('', True) }}
+			//console.log('bottomscanner disabled');
+			$('#bottomScannerTitle').html('<i class="fas fa-exclamation-triangle text-danger" style="font-size: 36px" data-toggle="tooltip" title="No scanner configured"></i> &nbsp; No Scanner Configured');
+			$('#bottomScannerBody').html('The bottom scanner is not configured.<br />If this is a mistake, there was an error reading the configuration file.<br />Please read the logs to determine and correct the issue.');
+			$('#bottomScannerImg').html('<img src="static/img/model/unknown.png" width="180px" class="img-fluid rounded-start">');
+		{% endif %}
+
+		// update top scanner information based on configuration file
+		{% if dictActiveProfile['tsenabled'] == 1 %}
+			{% if dictActiveProfile['tscommtype'].lower() == 'ethernet' %}
+				{{ writeWebLog('Top scanner uses ethernet: ' + dictActiveProfile['tsip'] + ':' + dictActiveProfile['tsport'], 'DEBUG')|default('', True) }}
+				// set up initial values
+				$('#topScannerTitle').html('&nbsp; {{ dictActiveProfile['tsmodel'] }}');
+				$('#topScannerBody').html('Device Name: <b>{{ dictActiveProfile['tsname'] }}</b><br />MAC Address: <b>{{ dictActiveProfile['tsmac'] }}</b><br />Communication Type: <b>{{ dictActiveProfile['tscommtype'] }}</b><br />IP Address: <span id="topScannerIPStatus"><b>{{ dictActiveProfile['tsip'] }}</b></span><br />TCP Port: <b>{{ dictActiveProfile['tsport'] }}</b>');
+				imgPath = "static/" + modelToImgLookup('{{ dictActiveProfile['tsmodel'] }}');
+				$('#topScannerImg').html('<img src="' + imgPath + '" width="180" class="img-fluid rounded-start">');
+
+				// ping scanner to update title
+				socket.emit('Event_isScannerConnectedLan', '{{ dictActiveProfile['tsip'] }}', {{ dictActiveProfile['tsport'] }});
+				return false;
+			{% elif dictActiveProfile['tscommtype'].lower() == 'rs232' %}
+				//console.log('top side is serial type');
+				// set up initial values
+				$('#topScannerTitle').html('<i class="fas fa-question-circle text-muted" style="font-size: 36px" data-toggle="tooltip" title="This scanner uses serial communication; start the barcode reading process to determine connectivity."></i>&nbsp; {{ dictActiveProfile['tsmodel'] }}');
+				$('#topScannerBody').html('Device Name: <b>{{ dictActiveProfile['tsname'] }}</b><br />MAC Address: <b>{{ dictActiveProfile['tsmac'] }}</b><br />Communication Type: <b>{{ dictActiveProfile['tscommtype'] }}</b><br />Serial Port: <b>{{ dictActiveProfile['tsport'] }}</b><br />Baud Rate: <b>{{ dictActiveProfile['tsbaud'] }} B</b><br />Parity: <b>{{ dictActiveProfile['tsparity'] }}</b><br />Stop Bit: <b>{{ dictActiveProfile['tsstopbit'] }}</b><br />Byte Size: <b>{{ dictActiveProfile['tsbytesize'] }}</b>');
+			{% endif %}
+			// set image
+			imgPath = "static/" + modelToImgLookup('{{ dictActiveProfile['tsmodel'] }}');
+			$('#topScannerImg').html('<img src="' + imgPath + '" width="180" class="img-fluid rounded-start">');
+			//<img id="topScannerImg" src="static/img/single.png" class="img-fluid rounded-start" alt="...">
+
+		{% else %}
+			{{ writeWebLog('Top scanner disabled per profile', 'INFO')|default('', True) }}
+			//console.log('topscanner disabled');
+			$('#topScannerTitle').html('<i class="fas fa-exclamation-triangle text-danger" style="font-size: 36px" data-toggle="tooltip" title="No scanner configured"></i> &nbsp; No Scanner Configured');
+			$('#topScannerBody').html('The top scanner is not configured.<br />If this is a mistake, there was an error reading the configuration file.<br />Please read the logs to determine and correct the issue.');
+			$('#topScannerImg').html('<img src="static/img/model/unknown.png" width="180" class="img-fluid rounded-start">');
+		{% endif %}
+	});
+</script>
+{% endblock %}

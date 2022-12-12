@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Help - Omron Microscan VT-Interface Module</title>
+		<link rel="stylesheet" type="text/css" href="../static/css/bootstrap-table.min.css">
+		<link rel="stylesheet" type="text/css" href="../static/css/all.css">
+		<!--<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css">-->
+		<link rel="stylesheet" type="text/css" href="../static/css/omronstyles.css">
+	</head>
+	<body>
+		<main>
+			<div class="container-fluid g-0" style="padding-bottom: 20px;">
+				<div class="row" id="OmronHeader">
+					<a href="/" style="box-sizing: border-box; cursor: pointer; font: 400 17px/28px Open Sans,Arial,sans-serif; font-size: 18px; -webkit-tap-highlight-color: transparent; display: flex; height: 100%; color: #fff !important; text-decoration: none; align-items: center; justify-content: flex-start; outline: none; width: 715px !important; word-break: unset;"><div style="justify-content: center; height: 100%; padding: 0 20px; margin-right: 0; padding-left: 12px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 322.51 62.71" width="167px" height="52px"><g id="レイヤー_2" data-name="レイヤー 2"><g id="レイヤー_1-2" data-name="レイヤー 1"><path fill="#005eb8" d="M31.35 49.57a18.22 18.22 0 1 1 18.22-18.22 18.21 18.21 0 0 1-18.22 18.22m0 13.14A31.36 31.36 0 1 0 0 31.35a31.36 31.36 0 0 0 31.35 31.36M234.71 62.71a31.36 31.36 0 1 1 31.36-31.35 31.36 31.36 0 0 1-31.36 31.35m0-13.14a18.22 18.22 0 1 0-18.21-18.21 18.21 18.21 0 0 0 18.21 18.21M69.58 1.9v59.32h13.14V12.84h14.33v48.38h13.14V12.84h5.08a9.25 9.25 0 0 1 9.25 9.26v39.12h13.14V22.4a20.91 20.91 0 0 0-20.9-20.91h-34q-6.63 0-13.18.41ZM272.33 1.9v59.32h13.14V12.84h14.63a9.26 9.26 0 0 1 9.26 9.26v39.12h13.14V22.4a20.91 20.91 0 0 0-20.9-20.91h-16.14c-4.46 0-8.78.14-13.13.41ZM147.82 1.9v59.32H161V12.84h15.53a9.26 9.26 0 1 1 0 18.51h-11.39l20.3 29.87h16.13L187 39.73a19 19 0 0 0 11.88-17.63 20.61 20.61 0 0 0-20.61-20.61h-17.33q-6.62 0-13.12.41Z"></path></g></g></svg></div><span style="-webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; color: #4a4a4a; font-size: 24px; font-weight: 600; letter-spacing: -.6px; line-height: 33px; border: none; clip: unset; height: auto; margin: unset; overflow: initial; padding: 0; position: static; width: auto;">VT-Interface Module</span></a>
+				</div>
+				<div class="row" style="padding-left: 10px; padding-top:10px;">
+					<h3>Get Help</h3>
+					<div class="row" style="padding-left: 20px;">
+						<h5>Setup Guide</h5>
+						<div class="row" style="padding-left: 50px">
+							Thank you for purchasing the Omron Microscan VT-Interface Module. To begin using your device, follow the instructions below:
+							<ol style="padding-left: 15px;">
+								<li>Connect a compatible barcode reader via Ethernet and power it on. If you have a second barcode reader, connect and power it on as well. </li>
+								<li>Connect a keyboard and mouse to the <b>Omron Microscan VT-Interface Module</b>, and an HDMI cable from the device to a monitor or other display.</li>
+								<li>Ensure the <b>Omron Microscan VT-Interface Module</b> is powered on. After the device has booted, use the <i>Chromium</i> web browser to navigate to <code><a href="{{url_for('managescanners')}}">http://localhost:5000/managescanners</a></code>.</li>
+								<li>Click on the "Add New Profile" button.</li>
+								<li>Configure the bottom- and/or top-side scanner using the <i>Automatic</i> method (supported by some Omron smart barcode readers) or Manual method by specifying the communication settings for the device. Save your changes when finished.</li>
+								<li>It's possible to create multiple profiles. This can be used, for example, when moving the <b>Omron Microscan VT-Interface Module</b> to another production line with a different set of barcode readers. Select the active profile on the Manage Scanners screen and click Save when finished.</li>
+								<li>Connect an RS-232C serial cable from the port labeled <i>To Inspection Machine</i> to the Omron VT-S series inspection machine in either port labeled "RS-232C".</li>
+								<li>Using the inspection machine software, from the Main Menu navigate to Machine Settings -> System Settings -> Communication Settings, select the relevant RS-232C port from the dropdown menu, and click the Set button to save your changes.</li>
+								<li>Using the <b>Omron Microscan VT-Interface Module</b> <i>Chromium</i> web browser, navigate to <code><a href="http://localhost:5000">http://localhost:5000</a></code>, confirm that your scanner(s) are connected and accessible, then click "Start Barcode Monitoring".</li>
+								<li>For any scanner which supports Weblink, the weblink interface will be shown on this page. Additionally, whenever a scanner successfully scans a barcode, the barcode information will be displayed. Whenever a barcode is sent to the Omron inspection machine, a message will be displayed.</li>
+							</ol>
+						</div><br/>
+
+						<h5>Resources</h5>
+						<div class="row" style="padding-left: 50px">
+							<a href="">Download the user manual</a>
+						</div><br/>
+						
+						<h5>Technical Support</h5>
+						<div class="row" style="padding-left: 50px">
+							<a href="mailto:AOISupport-us-a@omron.com">Contact us</a> at the Omron AOI support email address (AOISupport-us-a@omron.com). Your email is forwarded to our engineering team who can support you with any issues or questions.<p></p>
+						</div><br/>
+						
+						<h5>About the Omron Microscan VT-Interface Module</h5>
+						<div class="row" style="padding-left: 50px">
+							The Omron Microscan VT-Interface Module was developed by <a href="mailto:karl.long@omron.com">Karl Long</a>, an Omron AOI Application Engineer who recognized the industry need for an integrated device that could read barcode data from multiple inputs and automatically send the correct information to the AOI inspection machine.
+							Fellow AOI Application Engineer <a href="mailto:david.young@omron.com">David Young</a> assisted with some of the software development.<br/>
+							The original device, unofficially and internally referred to as the <i>Karlbox</i> (reinforcing the stereotype that engineers are very clever when naming their creations), was powered by a Raspberry Pi and contained hardware and cabling which handled the barcode input data. The current version has incorporated several notable improvements, including handling all input data digitally (which allows on-the-fly logging, verification, and logic-based manipulation of barcode data), improved construction materials and design, and a flexible profile-oriented configuration which allows fast, simple setup for a wide range of devices and scenarios.<br/>
+							The VT-Interface Module is being actively improved, but feature requests or inquiries about the latest product model can be directed to the AOI support email address at <a href="mailto:AOISupport-us-a@omron.com">AOISupport-us-a@omron.com</a>.
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		
+		<script type=text/javascript src="{{url_for('static', filename='js/jquery-3.6.0.min.js')}}"></script>
+		<script type=text/javascript src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+		<script type=text/javascript src="{{url_for('static', filename='js/bootstrap-table.min.js')}}"></script>
+	</body>
+</html>

@@ -1,0 +1,14 @@
+[Unit]
+Description=Kiosk Launcher
+After=systemd-user-sessions.service gunicorn.service dbus.target network.target sound.target network-online.target
+
+[Service]
+User=omron
+ExecStart=/bin/bash -c "startx /etc/X11/Xsession /opt/kiosk.sh --"
+
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=kioskService
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,4 @@
+OmronVTInterfaceModule.*
+OmronVTInterfaceModule/__pycache__/
+*.pyc
+

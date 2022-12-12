@@ -1,0 +1,369 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Manage Scanners - Omron Microscan VT-Interface Module</title>
+		<link rel="stylesheet" type="text/css" href="../static/css/all.css">
+		<link rel="stylesheet" type="text/css" href="../static/css/bootstrap-table.min.css">
+		<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css">
+	</head>
+	<style>
+		@font-face {
+			font-family: Titillium Web;
+			font-display:fallback;src: url(/static/webfonts/titilliumweb-regular-webfont.woff2) format("woff2"),url(/static/webfonts/titilliumweb-regular-webfont.woff) format("woff");
+			font-weight: 400;
+			font-style: normal
+		}
+
+		@font-face {
+			font-family: Open Sans;
+			font-display:fallback;src: url(/static/webfonts/opensans-regular.woff2) format("woff2"),url(/static/webfonts/opensans-regular.woff) format("woff");
+			font-weight: 400;
+			font-style: normal
+		}
+	</style>
+	<body>
+		<main>
+			<div class="container-fluid g-0" style="height: 95vh">
+				<div class="row" id="OmronHeader">
+					<a href="/" style="box-sizing: border-box; cursor: pointer; font: 400 17px/28px Open Sans,sans-serif; font-size: 18px; -webkit-tap-highlight-color: transparent; display: flex; height: 100%; color: #fff !important; text-decoration: none; align-items: center; justify-content: flex-start; outline: none; width: 715px !important; word-break: unset;"><div style="justify-content: center; height: 100%; padding: 0 20px; margin-right: 0; padding-left: 12px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 322.51 62.71" width="167px" height="52px"><g id="レイヤー_2" data-name="レイヤー 2"><g id="レイヤー_1-2" data-name="レイヤー 1"><path fill="#005eb8" d="M31.35 49.57a18.22 18.22 0 1 1 18.22-18.22 18.21 18.21 0 0 1-18.22 18.22m0 13.14A31.36 31.36 0 1 0 0 31.35a31.36 31.36 0 0 0 31.35 31.36M234.71 62.71a31.36 31.36 0 1 1 31.36-31.35 31.36 31.36 0 0 1-31.36 31.35m0-13.14a18.22 18.22 0 1 0-18.21-18.21 18.21 18.21 0 0 0 18.21 18.21M69.58 1.9v59.32h13.14V12.84h14.33v48.38h13.14V12.84h5.08a9.25 9.25 0 0 1 9.25 9.26v39.12h13.14V22.4a20.91 20.91 0 0 0-20.9-20.91h-34q-6.63 0-13.18.41ZM272.33 1.9v59.32h13.14V12.84h14.63a9.26 9.26 0 0 1 9.26 9.26v39.12h13.14V22.4a20.91 20.91 0 0 0-20.9-20.91h-16.14c-4.46 0-8.78.14-13.13.41ZM147.82 1.9v59.32H161V12.84h15.53a9.26 9.26 0 1 1 0 18.51h-11.39l20.3 29.87h16.13L187 39.73a19 19 0 0 0 11.88-17.63 20.61 20.61 0 0 0-20.61-20.61h-17.33q-6.62 0-13.12.41Z"></path></g></g></svg></div><span style="-webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; color: #4a4a4a; font-size: 24px; font-weight: 600; letter-spacing: -.6px; line-height: 33px; border: none; clip: unset; height: auto; margin: unset; overflow: initial; padding: 0; position: static; width: auto;">VT-Interface Module</span></a>
+				</div>
+				<div class="row m-0" style="width: 100%">
+					<!-- <div style="height: 250px">Insert "Add" form controls</div> -->
+					
+			<!-- data-id-field="profiles.profilename" data-click-to-select="true" data-select-item-name="main.activeProfile" -->
+			<table id="configTable" class="table-striped table-sm" data-toggle="table" data-flat="true" data-click-to-select="true" data-url="static/karlboxconfig.json" data-response-handler="responseHandler">
+				<thead style="font-size: 14px;">
+					<tr>
+						<th rowspan="2" data-field="state" data-radio="true" data-show-select-title="true">Active Profile</th>
+						<th data-field="profilename" rowspan="2">Profile Name</th>
+						<th colspan="5">Bottom Scanner</th>
+						<th colspan="5">Top Scanner</th>
+					</tr>
+					<tr>
+						<th data-field="bsmodel">Device Model</th>
+						<th data-field="bsname">Device Name</th>
+						<th data-field="bsmac">MAC Address</th>
+						<th data-field="bsip">IP Address</th>
+						<th data-field="bsport">Port</th>
+						<th data-field="tsmodel">Device Model</th>
+						<th data-field="tsname">Device Name</th>
+						<th data-field="tsmac">MAC Address</th>
+						<th data-field="tsip">IP Address</th>
+						<th data-field="tsport">Port</th>
+					</tr>
+				</thead>
+				<tbody style="font-size: 12px;">
+					<tr>
+						<td></td>
+						<td>Profile Name &nbsp;&nbsp;<i class="fas fa-edit"></i>&nbsp;<i class="fas fa-trash-alt"></i></td>
+						<td>Device Model</td>
+						<td>Device Name</td>
+						<td>MAC Address</td>
+						<td>IP Address</td>
+						<td>Port</td>
+						<td>Device Model</td>
+						<td>Device Name</td>
+						<td>MAC Address</td>
+						<td>IP Address</td>
+						<td>Port</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<!-- <table id="configTable" class="table-striped table-sm" data-toggle="table" data-flat="true" data-url="static/karlboxconfig3.json" data-response-handler="responseHandler"></table> -->
+			<!-- Start Buttons row -->
+			<div class="row pt-3 ps-2 g-0">
+				<div class="col-1">
+					<a class="btn btn--solid-a" href="#" data-bs-toggle="modal" data-bs-target="#addProfileModal" style="box-sizing: border-box; margin: 0; vertical-align: baseline; display: inline-flex; justify-content: center; align-items: center; min-width: 165px; position: relative; text-align: center; cursor: pointer; overflow: hidden; transition: all .25s ease-in-out; width: auto; max-width: 100%; padding: 12px 20px; border: 2px solid; background-color: #005eb8; border-color: #005eb8; color: #fff;">
+						<span class="btn__text" style="word-break: break-word; font: 400 14px/14px Open Sans,Arial,sans-serif; text-align: center; cursor: pointer; color: #fff; font-size: 16px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; flex-wrap: wrap; z-index: 1;">Add New Profile</span>
+					</a>
+				</div>
+				<div class="col-1">
+					<a class="btn btn--solid-a" href="#" id="changeActiveProfile" style="box-sizing: border-box; margin: 0; vertical-align: baseline; display: inline-flex; justify-content: center; align-items: center; min-width: 165px; position: relative; text-align: center; cursor: pointer; overflow: hidden; transition: all .25s ease-in-out; width: auto; max-width: 100%; padding: 12px 20px; border: 2px solid; background-color: #005eb8; border-color: #005eb8; color: #fff;">
+						<span class="btn__text" style="word-break: break-word; font: 400 14px/14px Open Sans,Arial,sans-serif; text-align: center; cursor: pointer; color: #fff; font-size: 16px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; flex-wrap: wrap; z-index: 1;">Use Selected Profile</span>
+					</a>
+				</div>
+				<div class="col-1">
+					<a class="btn btn--solid-a" href="#" id="deleteSelectedProfile" style="box-sizing: border-box; margin: 0; vertical-align: baseline; display: inline-flex; justify-content: center; align-items: center; min-width: 165px; position: relative; text-align: center; cursor: pointer; overflow: hidden; transition: all .25s ease-in-out; width: auto; max-width: 100%; padding: 12px 20px; border: 2px solid; background-color: #005eb8; border-color: #005eb8; color: #fff;">
+						<span class="btn__text" style="word-break: break-word; font: 400 14px/14px Open Sans,Arial,sans-serif; text-align: center; cursor: pointer; color: #fff; font-size: 16px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; flex-wrap: wrap; z-index: 1;">Delete Selected Profile</span>
+					</a>
+				</div>
+				<div class="col"></div>
+			</div>
+			<!-- End Buttons row -->
+
+			<!-- Start Add profile modal -->
+			<div class="modal fade" id="addProfileModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal-dialog modal-xl">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="staticBackdropLabel">Add New Profile</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<!-- Start Form Control -->
+							<div class="input-group mb-3">
+								<span class="input-group-text" id="profileName">Profile Name</span>
+								<input type="text" class="form-control" aria-label="profileName" aria-describedby="profileName">
+							</div>
+							<b>First</b>, if you have a bottom-side scanner which supports Weblink (or you are unsure), connect it to the device and disconnect all other scanners. Ensure it's powered on and click "Automatic Detection" button. If the automatic detection fails or you don't have a weblink-enabled scanner, please manually type in the IP address, port, and scanner name (required) as well as any other available information. If you don't have a bottom-side scanner, leave these fields blank.<br/>
+							<a class="btn btn--solid-a" id="bottomAuto" href="" style="box-sizing: border-box; margin: 0; vertical-align: baseline; display: inline-flex; justify-content: center; align-items: center; min-width: 165px; position: relative; text-align: center; cursor: pointer; overflow: hidden; transition: all .25s ease-in-out; width: auto; max-width: 100%; padding: 12px 20px; border: 2px solid; background-color: #005eb8; border-color: #005eb8; color: #fff;">
+								<span class="btn__text" style="word-break: break-word; font: 400 14px/14px Open Sans,Arial,sans-serif; text-align: center; cursor: pointer; color: #fff; font-size: 16px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; flex-wrap: wrap; z-index: 1;">Automatic Detection</span>
+							</a>
+							<div class="row"></div><p></p>
+
+							<div class="input-group mb-3">
+								<span class="input-group-text" id="bottomModel">Model</span>
+								<input type="text" class="form-control" aria-label="bottomModel" aria-describedby="bottomModel">
+							</div>
+							<div class="input-group mb-3">
+								<span class="input-group-text" id="bottomName">Name (User defined)</span>
+								<input type="text" class="form-control" aria-label="bottomName" aria-describedby="bottomName">
+							</div>
+							<div class="input-group mb-3">
+								<span class="input-group-text" id="bottomMAC">MAC Address</span>
+								<input type="text" class="form-control" aria-label="bottomMAC" aria-describedby="bottomMAC">
+							</div>
+							<div class="input-group mb-3">
+								<span class="input-group-text" id="bottomIP">IP Address</span>
+								<input type="text" class="form-control" aria-label="bottomIP" aria-describedby="bottomIP">
+								<span class="input-group-text" id="bottomPort">Port</span>
+								<input type="text" class="form-control" aria-label="bottomPort" aria-describedby="bottomPort">
+							</div>
+							<b>Second</b>, if you have a top-side scanner which supports Weblink (or you are unsure), connect it to the device and disconnect all other scanners (including the bottom-side scanner if you just set it up). Ensure it's powered on and click "Automatic Detection" button. If the automatic detection fails or you don't have a weblink-enabled scanner, please manually type in the IP address, port, and scanner name (required) as well as any other available information. If you don't have a bottom-side scanner, leave these fields blank. <br/>
+							<a class="btn btn--solid-a" id="topAuto" href="" style="box-sizing: border-box; margin: 0; vertical-align: baseline; display: inline-flex; justify-content: center; align-items: center; min-width: 165px; position: relative; text-align: center; cursor: pointer; overflow: hidden; transition: all .25s ease-in-out; width: auto; max-width: 100%; padding: 12px 20px; border: 2px solid; background-color: #005eb8; border-color: #005eb8; color: #fff;">
+								<span class="btn__text" style="word-break: break-word; font: 400 14px/14px Open Sans,Arial,sans-serif; text-align: center; cursor: pointer; color: #fff; font-size: 16px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; flex-wrap: wrap; z-index: 1;">Automatic Detection</span>
+							</a>
+							<div class="row"></div><p></p>
+							
+							<div class="input-group mb-3">
+								<span class="input-group-text" id="topModel">Model</span>
+								<input type="text" class="form-control" aria-label="topModel" aria-describedby="topModel">
+							</div>
+							<div class="input-group mb-3">
+								<span class="input-group-text" id="topName">Name (User defined)</span>
+								<input type="text" class="form-control" aria-label="topName" aria-describedby="topName">
+							</div>
+							<div class="input-group mb-3">
+								<span class="input-group-text" id="topMAC">MAC Address</span>
+								<input type="text" class="form-control" aria-label="topMAC" aria-describedby="topMAC">
+							</div>
+							<div class="input-group mb-3">
+								<span class="input-group-text" id="topIP">IP Address</span>
+								<input type="text" class="form-control" aria-label="topIP" aria-describedby="topIP">
+								<span class="input-group-text" id="topPort">Port</span>
+								<input type="text" class="form-control" aria-label="topPort" aria-describedby="topPort">
+							</div>
+
+
+
+								
+							<!-- End Form Control -->
+						</div>
+						<div class="modal-footer">
+							<div class="row justify-content-end">
+								<div class="col"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button></div>
+								<div class="col"><button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveNewProfile">Save</button></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Add profile modal -->
+				</div>
+			</div>
+			
+			
+				
+			
+		</main>
+		<script type=text/javascript src="{{url_for('static', filename='js/jquery-3.6.0.min.js')}}"></script>
+		<script type=text/javascript src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+		<script type=text/javascript src="{{url_for('static', filename='js/bootstrap-table.min.js')}}"></script>
+		<script src="static/js/socket.io.min.js"></script>
+
+		<script>
+			function responseHandler(res) {
+				// check if currently processed profile is "Active Profile"
+				res.profiles.forEach(element => {
+					if (element.profilename == res.main.activeProfile) {
+						// element.state refers to data-field="state" attribute on <th>Active Profile</th> element
+						// set to true for profile which is set as active profile and false for everything else
+						element.state = true;
+					} else {
+						element.state = false;
+					}
+				});
+				// return only the profile information contained in the json data; not the main section which contains the activeProfile
+				return res.profiles;
+			}
+
+			$(document).ready(function(){
+				var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+				$("#changeActiveProfile").click(function() {
+					// get currently selected profile
+					var table = $('#configTable');
+					var selectedProfile = table.bootstrapTable('getSelections')[0].profilename;
+					// read config file to get current Active Profile
+					var jqxhr = $.getJSON("static/karlboxconfig.json", function() {}).done(function(jsonData) {
+						var currentActiveProfile = jsonData.main.activeProfile;
+
+						// only make a change if selected profile differs from the active profile
+						if (selectedProfile != currentActiveProfile) {
+							// change config file to reflect new active profile
+							jsonData.main.activeProfile = selectedProfile;
+							socket.emit('Event_overwriteConfigFile', jsonData, function(ack) {
+								//console.log(jsonData);
+								if (ack == "success") {
+									alert("Configuration file has been updated. The page will now refresh.");
+									location.reload();
+								} else {
+									alert("There was an error saving the latest configuration changes (check console log for proposed/modified json data). Please refresh the web page and try again.");
+								}
+							});
+						}
+					});
+				});
+
+				$("#deleteSelectedProfile").click(function() {
+					// get currently selected profile
+					var table = $('#configTable');
+					var selectedProfile = table.bootstrapTable('getSelections')[0].profilename;
+					var dialogresult = confirm('Are you sure you want to delete profile: ' + selectedProfile + "?");
+					if (dialogresult == true) {
+						// read current config file in order to remove selected profile
+						var jqxhr = $.getJSON("static/karlboxconfig.json", function() {}).done(function(jsonData) {
+							if (jsonData.profiles.length <= 1) {
+								alert("Cannot delete the last profile. Create a new one before deleting this one.");
+								return;
+							}
+							// apply filter to the profiles array:
+							var newJsonProfileData = jsonData.profiles.filter(function(element) {
+								// allow everything to pass the filter except for the selectedprofile
+								return element.profilename != selectedProfile;
+							});
+							// newJsonProfileData contains all profiles except for the profile we wanted to delete. Replace the existing jsondata with this modified version
+							jsonData.profiles = newJsonProfileData;
+							jsonData.main.activeProfile = jsonData.profiles[0].profilename;
+							socket.emit('Event_overwriteConfigFile', jsonData, function(ack) {
+								//console.log(jsonData);
+								if (ack == "success") {
+									alert("Configuration file has been updated. The page will now refresh.");
+									location.reload();
+								} else {
+									alert("There was an error saving the latest configuration changes (check console log for proposed/modified json data). Please refresh the web page and try again.");
+								}
+							});
+						});
+					}
+
+				});
+
+				//"Save" button for Add New Profile modal
+				$("#saveNewProfile").click(function() {
+					var table = $('#configTable');
+					var jqxhr = $.getJSON("static/karlboxconfig.json", function() {}).done(function(jsonData) {
+						// make sure profile name doesnt exist
+						// make sure that at least bottom or top side data is filled in
+						// TODO: proper error validation
+						jsonData.profiles.push({
+							profilename: $('[aria-label="profileName"]').val(), 
+							bsmodel: $('[aria-label="bottomModel"]').val(), 
+							bsname: $('[aria-label="bottomName"]').val(), 
+							bsmac: $('[aria-label="bottomMAC"]').val(), 
+							bsip: $('[aria-label="bottomIP"]').val(), 
+							bsport:$('[aria-label="bottomPort"]').val(),
+							tsmodel: $('[aria-label="topModel"]').val(), 
+							tsname: $('[aria-label="topName"]').val(), 
+							tsmac: $('[aria-label="topMAC"]').val(), 
+							tsip: $('[aria-label="topIP"]').val(), 
+							tsport:$('[aria-label="topPort"]').val()
+						});
+						jsonData.main.activeProfile = $('[aria-label="profileName"]').val();
+						socket.emit('Event_overwriteConfigFile', jsonData, function(ack) {
+							//console.log(jsonData);
+							if (ack == "success") {
+								alert("Configuration file has been updated. The page will now refresh.");
+								location.reload();
+							} else {
+								alert("There was an error saving the latest configuration changes (check console log for proposed/modified json data). Please refresh the web page and try again.");
+							}
+						});
+					});
+
+					// write new data to json object
+					/*
+					var table = $('#configTable');
+					console.log(table);
+					var newJsonData = $.getJSON("static/karlboxconfig3.json", function(oldJsonData) {
+						console.log(oldJsonData);
+						//console.log(oldJsonData.profiles);
+						var myprofileName = $('[aria-label="profileName"]').val();
+						oldJsonData.profiles.push(
+							{
+								profilename: $('[aria-label="profileName"]').val(), 
+								bsmodel: $('[aria-label="bottomModel"]').val(), 
+								bsname: $('[aria-label="bottomName"]').val(), 
+								bsmac: $('[aria-label="bottomMAC"]').val(), 
+								bsip: $('[aria-label="bottomIP"]').val(), 
+								bsport:$('[aria-label="bottomPort"]').val(),
+								tsmodel: $('[aria-label="topModel"]').val(), 
+								tsname: $('[aria-label="topName"]').val(), 
+								tsmac: $('[aria-label="topMAC"]').val(), 
+								tsip: $('[aria-label="topIP"]').val(), 
+								tsport:$('[aria-label="topPort"]').val()
+							});
+						console.log(oldJsonData.profiles);
+						console.log(oldJsonData.profiles[0]);
+						console.log(oldJsonData.profiles[0].profilename);
+					});
+					*/
+					//var jsonData = JSON.parse("{{url_for('static', filename='karlboxconfig2.json')}}");
+					//console.log(jsonData);
+					//console.log('emit config file write');
+
+					//socket.emit('Event_overwriteConfigFile', );
+					return false;
+				});
+
+				socket.on('Event_detectScannerInfoResult', function(msg) {
+					//console.log(msg);
+					if (msg.result == "success") {
+						if (msg.side == 'bottom') {
+							$('[aria-label="bottomModel"]').val(msg.model);
+							$('[aria-label="bottomName"]').val(msg.name);
+							$('[aria-label="bottomMAC"]').val(msg.mac);
+							$('[aria-label="bottomIP"]').val(msg.ip);
+							$('[aria-label="bottomPort"]').val(msg.tcp1);
+						} else {
+							$('[aria-label="topModel"]').val(msg.model);
+							$('[aria-label="topName"]').val(msg.name);
+							$('[aria-label="topMAC"]').val(msg.mac);
+							$('[aria-label="topIP"]').val(msg.ip);
+							$('[aria-label="topPort"]').val(msg.tcp1);
+						}
+					} 
+					else {
+						alert("No compatible scanner found");
+						return;
+					}
+				});
+
+				$("#bottomAuto").click(function() {
+					socket.emit('Event_detectScannerInfo', 'bottom');
+					return false;
+				});
+				$("#topAuto").click(function() {
+					socket.emit('Event_detectScannerInfo', 'top');
+					return false;
+				});
+				
+				
+			});
+
+			
+
+		</script>
+	</body>
+</html>

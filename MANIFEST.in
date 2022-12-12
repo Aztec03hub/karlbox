@@ -1,0 +1,8 @@
+include OmronVTInterfaceModule/ovtimconfig.py
+include OmronVTInterfaceModule/ovtimfunctions.py
+graft OmronVTInterfaceModule/static
+graft OmronVTInterfaceModule/templates
+graft OmronVTInterfaceModule/log
+global-exclude OmronVTInterfaceModule/.git
+global-exclude *.pyc
+global-exclude *.log

@@ -1,0 +1,241 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Omron Microscan VT-Interface Module</title>
+		<link rel="stylesheet" type="text/css" href="../static/css/all.css">
+		<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="../static/css/omronstyles.css">
+	</head>
+	<body>
+		<div class="container-fluid g-0" style="height: 95vh;">
+			<div class="row" id="OmronHeader">
+				<a href="/" style="box-sizing: border-box; cursor: pointer; font: 400 17px/28px Open Sans,Arial,sans-serif; font-size: 18px; -webkit-tap-highlight-color: transparent; display: flex; height: 100%; color: #fff !important; text-decoration: none; align-items: center; justify-content: flex-start; outline: none; width: 715px !important; word-break: unset;"><div style="justify-content: center; height: 100%; padding: 0 20px; margin-right: 0; padding-left: 12px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 322.51 62.71" width="167px" height="52px"><g id="レイヤー_2" data-name="レイヤー 2"><g id="レイヤー_1-2" data-name="レイヤー 1"><path fill="#005eb8" d="M31.35 49.57a18.22 18.22 0 1 1 18.22-18.22 18.21 18.21 0 0 1-18.22 18.22m0 13.14A31.36 31.36 0 1 0 0 31.35a31.36 31.36 0 0 0 31.35 31.36M234.71 62.71a31.36 31.36 0 1 1 31.36-31.35 31.36 31.36 0 0 1-31.36 31.35m0-13.14a18.22 18.22 0 1 0-18.21-18.21 18.21 18.21 0 0 0 18.21 18.21M69.58 1.9v59.32h13.14V12.84h14.33v48.38h13.14V12.84h5.08a9.25 9.25 0 0 1 9.25 9.26v39.12h13.14V22.4a20.91 20.91 0 0 0-20.9-20.91h-34q-6.63 0-13.18.41ZM272.33 1.9v59.32h13.14V12.84h14.63a9.26 9.26 0 0 1 9.26 9.26v39.12h13.14V22.4a20.91 20.91 0 0 0-20.9-20.91h-16.14c-4.46 0-8.78.14-13.13.41ZM147.82 1.9v59.32H161V12.84h15.53a9.26 9.26 0 1 1 0 18.51h-11.39l20.3 29.87h16.13L187 39.73a19 19 0 0 0 11.88-17.63 20.61 20.61 0 0 0-20.61-20.61h-17.33q-6.62 0-13.12.41Z"></path></g></g></svg></div><span style="-webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; color: #4a4a4a; font-size: 24px; font-weight: 600; letter-spacing: -.6px; line-height: 33px; border: none; clip: unset; height: auto; margin: unset; overflow: initial; padding: 0; position: static; width: auto;">VT-Interface Module</span></a>
+			</div>
+			<div class="row m-0" style="width: 100%; height: 90%;">
+				{% if scanner1ip != '' %}
+				<div class="col">
+					<iframe src="http://{{ scanner1ip }}" frameborder="0" scrolling="yes" style="height: 100%; width: 100%; float: left;" height="100%" width="100%" align="left"></iframe>
+				</div>
+				{% endif %}
+				{% if scanner2ip != '' %}
+				<div class="col">
+					<iframe src="http://{{ scanner2ip }}" frameborder="0" scrolling="yes" style="height: 100%; width: 100%; float: left;" height="100%" width="100%" align="left"></iframe>
+				</div>
+				{% endif %}
+			</div>
+			<!-- toast testing -->
+			<div class="toast-container position-absolute top-0 end-0 p-3">
+				<!--
+				<div id="toast1" class="toast position-absolute end-0 p-3 my-5" style="width:600px;" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="10000">
+					<div class="toast-header">
+						<strong class="me-auto" id="toast1Title"></strong>
+						<small id="toast1Timestamp"></small>
+						<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+					</div>
+					<div class="toast-body" id="toast1Body"></div>
+				</div>
+				<div id="toast2" class="toast position-absolute end-0 p-3 my-5" style="width:600px;" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="10000">
+					<div class="toast-header">
+						<strong class="me-auto" id="toast2Title"></strong>
+						<small id="toast2Timestamp"></small>
+						<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+					</div>
+					<div class="toast-body" id="toast2Body"></div>
+				</div>
+				-->
+			</div>
+			<!-- end toast section-->
+		</div>
+		
+		<script src="static/js/jquery-3.6.0.min.js"></script>
+        <script src="static/js/bootstrap.bundle.min.js"></script>
+		<!-- <script src="static/js/toast.js"></script> -->
+		<script src="static/js/socket.io.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				var socket = io.connect('http://' + document.domain + ':' + location.port);
+				var toastCounter = 0;
+
+				// display a toast message
+				// Only create new toast objects as needed. Old toasts which have been hidden should be reused
+				function displayToastMessage(type, title, ip, port, timestamp, content, autohide = true, delay = 5000) {
+					// first determine if we need to create a new toast or if we can reuse a hidden one
+					if ($('.hide').length > 0) {
+						
+						var existingToastDiv = $('.hide').first()[0];
+						//console.log(existingToastDiv);
+						$("#" + existingToastDiv.id).removeClass('hide');
+						$("#" + existingToastDiv.id).addClass('show');
+						var toastDiv = document.getElementById(existingToastDiv.id);
+						//console.log(existingToastDiv);
+						//console.log(existingToastDiv.id);
+						//console.log(toastDiv);
+						//$("#toastTooMany").addClass('show');
+					} else {
+						toastCounter += 1;
+						var toastDiv = document.createElement("div");
+						toastDiv.id = "toast" + toastCounter;
+						toastDiv.setAttribute("class", "toast");
+						toastDiv.setAttribute("style", "width:600px;");
+						toastDiv.setAttribute("role", "alert");
+						toastDiv.setAttribute("aria-live", "assertive");
+						toastDiv.setAttribute("aria-atomic", "true");
+					}
+					// increase active count and update attributes based on function arguments
+					//activeToastCounter += 1;
+					if (autohide == true) {
+						toastDiv.setAttribute("data-bs-autohide", "true");
+						toastDiv.setAttribute("data-bs-delay", String(delay));
+					} else {
+						toastDiv.setAttribute("data-bs-autohide", "false");
+					}
+
+					
+					// determine which icon to display and modify attributes as needed
+					if (type == "error") {
+						var icon = '<i class="fas fa-times text-danger"></i> ';
+						toastDiv.setAttribute("data-bs-autohide", "false"); // errors will always persist
+					} else if (type == "error_retry") {
+						//var icon = '<i class="fas fa-check text-success"></i>';
+						var icon = '<i class="fas fa-exclamation-triangle text-danger"></i> ';
+					} else if (type == "info") {
+						//var icon = '<i class="fas fa-check text-success"></i>';
+						var icon = '<i class="fas fa-barcode-read"></i> ';
+					} else if (type == "errorSerial") {
+						var icon = '<i class="fas fa-times text-danger"></i> ';
+						toastDiv.setAttribute("data-bs-autohide", "false"); // errors will always persist
+						ip = '';
+						port = 'dev/ttyTHS2';
+					} else if (type == "update") {
+						var icon = '<i class="fas fa-info"></i> ';
+					}
+					toastDiv.innerHTML = '<div class="toast-header"><strong class="me-auto">' + icon + title + '<br>' + ip + ':' + port + '</strong><small>' + timestamp + '</small><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button></div><div class="toast-body">' + content + '</div>';
+					$(".toast-container").append(toastDiv);
+					$("#" + toastDiv.id).toast("show");
+					//toastDiv.innerHTML = '<div class="toast-header"><strong class="me-auto"><i class="fas fa-exclamation-triangle text-danger"></i> Additional messages hidden</strong><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button></div><div class="toast-body">Please clear some of the existing popup messages before new ones can be displayed.<br>Barcode data is still being read and sent to inspection machine.</div>';
+				}
+
+				// receives notifications from scanners and determines what to do with them
+				socket.on('Event_scannerNotification', function(msg) {
+					//console.log(msg.data);
+					displayToastMessage(msg.type, msg.title, msg.ip, msg.port, msg.timestamp, msg.msg);
+				});
+
+				// start listening for LAN data
+				setTimeout(function() {
+					{% if scanner1ip != '' %}
+        				socket.emit('Event_readDataFromLan', '{{ scanner1ip }}', '{{ scanner1port }}');
+        				return false;
+					{% endif %}
+				}, 15000);
+				setTimeout(function() {
+					{% if scanner2ip != '' %}
+        				socket.emit('Event_readDataFromLan', '{{ scanner2ip }}', '{{ scanner2port }}');
+        				return false;
+					{% endif %}
+				}, 18000);
+				setTimeout(function() {
+					socket.emit('Event_startBarcodeOutput');
+					return false;
+				}, 20000);
+				//var barcodeOutput = '';
+				
+				//var activeToastCounter = 0;
+
+				/*
+				// create "Too many toasts" toast ahead of time
+				var toastDiv = document.createElement("div");
+				toastDiv.id = "toastTooMany";
+				toastDiv.setAttribute("class", "toast");
+				toastDiv.setAttribute("style", "width:600px;");
+				toastDiv.setAttribute("role", "alert");
+				toastDiv.setAttribute("aria-live", "assertive");
+				toastDiv.setAttribute("aria-atomic", "true");
+				toastDiv.setAttribute("data-bs-autohide", "true");
+				toastDiv.setAttribute("data-bs-delay", "30000");
+				toastDiv.innerHTML = '<div class="toast-header"><strong class="me-auto"><i class="fas fa-exclamation-triangle text-danger"></i> Additional messages hidden</strong><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button></div><div class="toast-body">Please clear some of the existing popup messages before new ones can be displayed.<br>Barcode data is still being read and sent to inspection machine.</div>';
+				$(".toast-container").append(toastDiv);
+
+				socket.on('Event_scannerOutputData', function(msg) {
+					if (activeToastCounter > 5) {
+						//console.log(activeToastCounter);
+						if (msg.type == 'info') {
+							barcodeOutput = msg.data;
+						}
+						return;
+					} else {
+						toastCounter += 1;
+						activeToastCounter += 1;
+						var toastDiv = document.createElement("div");
+						toastDiv.id = "toast" + toastCounter;
+						toastDiv.setAttribute("class", "toast");
+						toastDiv.setAttribute("style", "width:600px;");
+						toastDiv.setAttribute("role", "alert");
+						toastDiv.setAttribute("aria-live", "assertive");
+						toastDiv.setAttribute("aria-atomic", "true");
+
+						if (msg.type == 'error')
+						{
+							toastDiv.innerHTML = '<div class="toast-header"><strong class="me-auto"><i class="fas fa-exclamation-triangle text-danger"></i> ' + msg.title + '<br>' + msg.ip + ':' + msg.port + '</strong><small>' + msg.timestamp + '</small><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button></div><div class="toast-body">' + msg.data + '</div>';
+							toastDiv.setAttribute("data-bs-autohide", "false");
+						} else if (msg.type == 'info')
+						{
+							toastDiv.setAttribute("data-bs-autohide", "true");
+							toastDiv.setAttribute("data-bs-delay", "5000");
+							toastDiv.innerHTML = '<div class="toast-header"><strong class="me-auto"><i class="fas fa-check text-success"></i> ' + msg.title + '<br>' + msg.ip + ':' + msg.port + '</strong><small>' + msg.timestamp + '</small><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button></div><div class="toast-body">' + msg.data + '</div>';
+							barcodeOutput = msg.data;
+						}
+						$(".toast-container").append(toastDiv);
+						$("#toast" + toastCounter).toast("show");
+
+						if (activeToastCounter > 5) {
+							if ($('#toastTooMany').hasClass('show'))
+							{
+								// message already displayed, so do nothing
+								return;
+							} else {
+								$("#toastTooMany").toast("show");
+							}
+						}
+					}
+				});
+				*/
+				
+
+				// every 5 seconds, go through all hidden toast elements to decrement the active counter and remove the element
+				/*
+				setInterval(function() {
+					$('.hide').each(function(index, elem) {
+						if (elem == $("#toastTooMany"))
+						{
+							// dont remove this element
+							//console.log('Didnt remove toomany toast');
+						} else {
+							activeToastCounter -= 1;
+						var element = $(this);
+						element.remove();
+						}
+					});
+					if (activeToastCounter < 5) {
+						$("#toastTooMany").removeClass('show');
+						$("#toastTooMany").addClass('hide');
+					}
+				}, 10000);
+				*/
+
+				
+
+				/*
+				setInterval(function() {
+					//console.log(barcodeOutput);
+					//if (barcodeOutput != '')
+					//{
+					socket.emit('Event_startBarcodeOutput', barcodeOutput);
+					//}
+					return false;
+				}, 1000);
+				*/
+			});
+		</script>
+	</body>
+</html>

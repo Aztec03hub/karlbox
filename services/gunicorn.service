@@ -1,0 +1,15 @@
+[Unit]
+Description=Gunicorn instance for Karlbox
+After=dbus.target network.target sound.target network-online.target
+
+[Service]
+User=omron
+Group=www-data
+WorkingDirectory=/home/omron/Documents/karlbox
+ExecStart=/home/omron/.local/bin/gunicorn -k geventwebsocket.gunicorn.workers.GeventWebSocketWorker -w 1 -b 127.0.0.1:5000 "OmronVTInterfaceModule:app"
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=gunicornService
+
+[Install]
+WantedBy=multi-user.target
